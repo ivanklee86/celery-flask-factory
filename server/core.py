@@ -1,6 +1,7 @@
 import os
 import logging
 from flask import Flask
+from flask_unleash import Unleash
 from server.controller import routes, tasks, celery
 
 logger = logging.getLogger()
@@ -23,6 +24,9 @@ def entrypoint(debug=False, mode='app'):
     configure_logging(debug=debug)
     configure_celery(app, tasks.celery)
 
+    # start extensions
+    unleash = Unleash(app)
+
     # register blueprints
     app.register_blueprint(routes.bp, url_prefix='')
 
@@ -36,6 +40,9 @@ def configure_app(app):
     logger.info('configuring flask app')
     app.config['CELERY_BROKER_URL'] = os.environ.get('CELERY_BROKER_URL')
     app.config['CELERY_RESULT_BACKEND'] = os.environ.get('CELERY_RESULT_BACKEND')
+    app.config['UNLEASH_URL'] = "https://unleash.herokuapp.com/api"
+    app.config['UNLEASH_APP_NAME'] = "flask-celery-invest"
+    app.config['UNLEASH_ENVIRONMENT'] = 'staging'
 
 def configure_celery(app, celery):
 

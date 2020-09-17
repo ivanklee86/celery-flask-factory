@@ -1,5 +1,5 @@
 import logging
-from flask import Flask, jsonify, Blueprint
+from flask import Flask, jsonify, Blueprint, current_app
 from server.controller import tasks
 
 bp = Blueprint('tasks', __name__)
@@ -7,6 +7,9 @@ logger = logging.getLogger()
 
 @bp.route('/')
 def view_base():
+    unleash = current_app.extensions['Unleash']
+    print(f"Unleash check: {unleash.client.is_enabled('ivantest')}")
+    
     return jsonify({'status': 'success'})
 
 @bp.route('/sleep/', methods=['POST'])
