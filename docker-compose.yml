@@ -27,6 +27,23 @@ services:
      - ./docker.env
     volumes:
       - .:/app/
+  flower:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    image: celery-factory-flower
+    container_name: some_flower
+    depends_on:
+      - redis
+      - rabbitmq
+      - worker
+    command: celery flower -A entrypoint_celery.celery --loglevel=info
+    env_file:
+     - ./docker.env
+    ports:
+      - "5555:5555"
+    volumes:
+      - .:/app/
   redis:
     image: redis:alpine
     container_name: some_redis
