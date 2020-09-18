@@ -10,7 +10,7 @@ def view_base():
     unleash = current_app.extensions['Unleash']
     print(f"Unleash check: {unleash.client.is_enabled('ivantest')}")
     
-    return jsonify({'status': 'success'})
+    return jsonify({'status': 'success', 'feature_flag': unleash.client.is_enabled('ivantest')})
 
 @bp.route('/sleep/', methods=['POST'])
 @bp.route('/sleep/<int:sleep_time>', methods=['POST'])

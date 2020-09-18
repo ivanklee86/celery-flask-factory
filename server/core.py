@@ -40,7 +40,8 @@ def configure_app(app):
     logger.info('configuring flask app')
     app.config['CELERY_BROKER_URL'] = os.environ.get('CELERY_BROKER_URL')
     app.config['CELERY_RESULT_BACKEND'] = os.environ.get('CELERY_RESULT_BACKEND')
-    app.config['UNLEASH_URL'] = "https://unleash.herokuapp.com/api"
+    app.config['UNLEASH_URL'] = "https://app.unleash-hosted.com/demo/api"
+    app.config['UNLEASH_CUSTOM_HEADERS'] = {'Authorization': '56907a2fa53c1d16101d509a10b78e36190b0f918d9f122d'}
     app.config['UNLEASH_APP_NAME'] = "flask-celery-invest"
     app.config['UNLEASH_ENVIRONMENT'] = 'staging'
 
