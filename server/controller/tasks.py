@@ -11,7 +11,7 @@ celery = Celery(__name__, autofinalize=False)
 def wait_task(self, sleep_time):
     '''sample task that sleeps 5 seconds then returns the current datetime'''
     unleash = current_app.extensions['Unleash']
-    print(f"Unleash Worker check: {unleash.client.is_enabled('ivantest')}")
+    print(f"Unleash Worker check: {unleash.client.is_enabled('ivan-celery-test')}")
 
     time.sleep(sleep_time)
     return datetime.datetime.now().isoformat()

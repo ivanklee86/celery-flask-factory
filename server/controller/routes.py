@@ -8,9 +8,9 @@ logger = logging.getLogger()
 @bp.route('/')
 def view_base():
     unleash = current_app.extensions['Unleash']
-    print(f"Unleash check: {unleash.client.is_enabled('ivantest')}")
+    print(f"Unleash check: {unleash.client.is_enabled('ivan-celery-test')}")
     
-    return jsonify({'status': 'success', 'feature_flag': unleash.client.is_enabled('ivantest')})
+    return jsonify({'status': 'success', 'feature_flag': unleash.client.is_enabled('ivan-celery-test')})
 
 @bp.route('/sleep/', methods=['POST'])
 @bp.route('/sleep/<int:sleep_time>', methods=['POST'])
